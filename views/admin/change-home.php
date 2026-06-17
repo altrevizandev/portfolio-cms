@@ -181,112 +181,114 @@ $formations = $sectionThree->getFormations();
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <form
-              action="/actions/updateSectionOne.php"
-              method="post"
-              enctype="multipart/form-data"
-              class="d-flex flex-column gap-3"
-            >
-              <input type="hidden" name="section_id" value="<?= $sectionOneData['id'] ?>">
-              <div class="border-bottom">
-                <h6 class="mb-3">Cabeçalho</h6>
-                <div class="mb-3 d-flex flex-column gap-3">
-                  <div clas="d-flex gap-2 align-items-center">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      name="so_one_change_img"
-                      id="so-change-img-check-input"
-                    >
-                    <label class="form-check-label" for="so-change-img-check-input">Quer mudar a imagem?</label>
-                  </div>
-                  <div id="so-change-img-area">
-                    <input type="hidden" name="old_image" value="<?= $sectionOneData['image'] ?>" id="so-change-old-image">
-                    <label class="form-label">Imagem</label>
-                    <input type="file" class="form-control" aria-label="file example" name="new_image" accept="image/*" id="so-change-image-input">
-                  </div>
-                  <div>
-                    <img src="<?= $sectionOneData['image'] ?>" class="img-thumbnail" alt="Image" style="width: 25rem;" id="so-change-image-preview">
-                    <button id="so-change-cancel-change-image-btn" type="button" class="btn btn-link btn-sm text-danger">Cancelar troca de imagem</button>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Nome</label>
-                  <input class="form-control" type="text" name="name" placeholder="Entre com seu nome" value="<?= $sectionOneData['name'] ?>">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Endereço</label>
-                  <input class="form-control" type="text" name="address" placeholder="Entre com seu endereço" value="<?= $sectionOneData['address'] ?>">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Data de Nascimento</label>
-                  <input class="form-control" type="date" name="birth_date" value="<?= date('Y-m-d', strtotime($sectionOneData['birth_date'])) ?>">
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Cargo</label>
-                  <input class="form-control" type="text" name="position" placeholder="Entre com seu cargo" value="<?= $sectionOneData['position'] ?>">
-                </div>
-              </div>
-              <div class="border-bottom">
-                <h6>Sobre mim</h6>
-                <div class="mb-3">
-                  <label class="form-label">Descrição</label>
-                  <textarea class="form-control" type="text" name="about_me" placeholder="Entre com uma descrição sobre você"><?= $sectionOneData['about'] ?></textarea>
-                </div>
-              </div>
-              <div class="border-bottom">
-                <h6>Estudo e aprendizado</h6>
-                <div class="mb-3">
-                  <label class="form-label">Descrição</label>
-                  <textarea class="form-control" type="text" name="studies" placeholder="Entre com uma descrição sobre seus estudos e aprendizados"><?= $sectionOneData['studies'] ?></textarea>
-                </div>
-              </div>
-              <div class="mb-3">
-                <h6>Stacks Principais</h6>
-                <label class="form-label">Alterar as stacks que você usou para criar esse projeto</label>
-                <div class="d-flex gap-3">
-                  <?php if (count($stacks) > 0) { ?>
-                    <div class="d-flex gap-2 justify-content-around flex-wrap">
-                      <?php foreach( $stacks as $stack ) { ?>
-                        <div class="form-check d-flex align-items-center gap-2">
-                          <input class="form-check-input" type="checkbox" 
-                          value="<?= $stack['id'] ?>" name="stacks[]" id="check_<?= $stack['name'] ?>" <?= in_array($stack['id'], array_column($sectionOneData['stacks'], 'stack_id')) ? "checked" : "" ?>>
-                          <span class="badge rounded-pill bg-white text-dark border px-3 py-2 shadow-sm">
-                            <i class="<?= $stack['icon'] ?> me-1"></i>
-                            <label class="form-check-label" for="check_<?= $stack['name'] ?>">
-                              <?= $stack['name'] ?>
-                            </label>
-                          </span>
-                        </div>
-                      <?php } ?>
+            <?php if ($sectionOneData != null) : ?>
+              <form
+                action="/actions/updateSectionOne.php"
+                method="post"
+                enctype="multipart/form-data"
+                class="d-flex flex-column gap-3"
+              >
+                <input type="hidden" name="section_id" value="<?= $sectionOneData['id'] ?>">
+                <div class="border-bottom">
+                  <h6 class="mb-3">Cabeçalho</h6>
+                  <div class="mb-3 d-flex flex-column gap-3">
+                    <div clas="d-flex gap-2 align-items-center">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="so_one_change_img"
+                        id="so-change-img-check-input"
+                      >
+                      <label class="form-check-label" for="so-change-img-check-input">Quer mudar a imagem?</label>
                     </div>
+                    <div id="so-change-img-area">
+                      <input type="hidden" name="old_image" value="<?= $sectionOneData['image'] ?>" id="so-change-old-image">
+                      <label class="form-label">Imagem</label>
+                      <input type="file" class="form-control" aria-label="file example" name="new_image" accept="image/*" id="so-change-image-input">
+                    </div>
+                    <div>
+                      <img src="<?= $sectionOneData['image'] ?>" class="img-thumbnail" alt="Image" style="width: 25rem;" id="so-change-image-preview">
+                      <button id="so-change-cancel-change-image-btn" type="button" class="btn btn-link btn-sm text-danger">Cancelar troca de imagem</button>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input class="form-control" type="text" name="name" placeholder="Entre com seu nome" value="<?= $sectionOneData['name'] ?>">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Endereço</label>
+                    <input class="form-control" type="text" name="address" placeholder="Entre com seu endereço" value="<?= $sectionOneData['address'] ?>">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Data de Nascimento</label>
+                    <input class="form-control" type="date" name="birth_date" value="<?= date('Y-m-d', strtotime($sectionOneData['birth_date'])) ?>">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Cargo</label>
+                    <input class="form-control" type="text" name="position" placeholder="Entre com seu cargo" value="<?= $sectionOneData['position'] ?>">
+                  </div>
+                </div>
+                <div class="border-bottom">
+                  <h6>Sobre mim</h6>
+                  <div class="mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-control" type="text" name="about_me" placeholder="Entre com uma descrição sobre você"><?= $sectionOneData['about'] ?></textarea>
+                  </div>
+                </div>
+                <div class="border-bottom">
+                  <h6>Estudo e aprendizado</h6>
+                  <div class="mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-control" type="text" name="studies" placeholder="Entre com uma descrição sobre seus estudos e aprendizados"><?= $sectionOneData['studies'] ?></textarea>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <h6>Stacks Principais</h6>
+                  <label class="form-label">Alterar as stacks que você usou para criar esse projeto</label>
+                  <div class="d-flex gap-3">
+                    <?php if (count($stacks) > 0) { ?>
+                      <div class="d-flex gap-2 justify-content-around flex-wrap">
+                        <?php foreach( $stacks as $stack ) { ?>
+                          <div class="form-check d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="checkbox" 
+                            value="<?= $stack['id'] ?>" name="stacks[]" id="check_<?= $stack['name'] ?>" <?= in_array($stack['id'], array_column($sectionOneData['stacks'], 'stack_id')) ? "checked" : "" ?>>
+                            <span class="badge rounded-pill bg-white text-dark border px-3 py-2 shadow-sm">
+                              <i class="<?= $stack['icon'] ?> me-1"></i>
+                              <label class="form-check-label" for="check_<?= $stack['name'] ?>">
+                                <?= $stack['name'] ?>
+                              </label>
+                            </span>
+                          </div>
+                        <?php } ?>
+                      </div>
+                    <?php } else { ?>
+                      <h5>Nenhuma stack cadastrada</h5>
+                    <?php } ?>
+                  </div>
+                </div>
+                <div>
+                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                    <button
+                      class="btn btn-primary btn-sm"
+                      type="submit"
+                      name="update_section_one"
+                    >
+                      Salvar
+                    </button>
                   <?php } else { ?>
-                    <h5>Nenhuma stack cadastrada</h5>
+                    <button
+                      class="btn btn-primary btn-sm"
+                      type="submit"
+                      name="update_section_one"
+                      disabled
+                    >
+                      Salvar
+                    </button>
+
                   <?php } ?>
                 </div>
-              </div>
-              <div>
-                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                  <button
-                    class="btn btn-primary btn-sm"
-                    type="submit"
-                    name="update_section_one"
-                  >
-                    Salvar
-                  </button>
-                <?php } else { ?>
-                  <button
-                    class="btn btn-primary btn-sm"
-                    type="submit"
-                    name="update_section_one"
-                    disabled
-                  >
-                    Salvar
-                  </button>
-
-                <?php } ?>
-              </div>
-            </form>
+              </form>
+            <?php endif; ?>
           </div>
         </div>
       </div>
