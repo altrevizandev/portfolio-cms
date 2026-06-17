@@ -6,6 +6,10 @@ require_once ROOT_PATH . 'classes/SectionOne.php';
 require_once ROOT_PATH . 'classes/SectionTwo.php';
 require_once ROOT_PATH . 'classes/SectionThree.php';
 
+print_r(password_hash('Alt@839517240999', PASSWORD_DEFAULT));
+echo "<br>";
+print_r(password_hash('visualizador', PASSWORD_DEFAULT));
+exit;
 $st = new Stacks();
 
 $stacks = $st->listStacks();

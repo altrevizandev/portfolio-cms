@@ -68,7 +68,7 @@
               <div class="row g-5 align-items-center">
                 <div class="col-md-4 col-md-center">
                   <img
-                    src="/public/images/eu.jpeg"
+                    src="/public/images/login.jpeg"
                     class="img-fluid rounded-4 shadow"
                     style="max-width: 250px;"
                     alt="Andre"
