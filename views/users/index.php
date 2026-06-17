@@ -1,7 +1,7 @@
 <?php
   require_once '../../config/Constants.php';
 
-  require_once ROOT_PATH . '../classes/Auth.php';
+  require_once ROOT_PATH . 'classes/Auth.php';
 
   $user = new User();
 

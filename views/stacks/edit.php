@@ -1,7 +1,7 @@
 <?php
   require_once '../../config/Constants.php';
 
-  require_once ROOT_PATH . '../classes/Stacks.php';
+  require_once ROOT_PATH . 'classes/Stacks.php';
 
   if (!isset($_GET["stack_id"])) {
     header('Location: /views/stacks');

@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../config/Constants.php';
 
-require_once ROOT_PATH . '/config/Database.php';
-require_once ROOT_PATH . '/classes/Session.php';
-require_once ROOT_PATH . '/classes/Stacks.php';
+require_once ROOT_PATH . 'config/Database.php';
+require_once ROOT_PATH . 'classes/Session.php';
+require_once ROOT_PATH . 'classes/Stacks.php';
 
 class SectionThree {
   private Database $db;

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/Constants.php';
 
 require_once __DIR__ . '/../config/Database.php';
 
-require_once ROOT_PATH . '../classes/Session.php';
+require_once ROOT_PATH . 'classes/Session.php';
 
 class Stacks {
   private Database $db;

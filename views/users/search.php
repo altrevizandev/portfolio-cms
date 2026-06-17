@@ -1,7 +1,7 @@
 <?php
   require_once '../../config/Constants.php';
 
-  require_once ROOT_PATH . '../classes/Auth.php';
+  require_once ROOT_PATH . 'classes/Auth.php';
 
   if (!isset($_GET['user_name'])) {
     header('Location: /views/users');

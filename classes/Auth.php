@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/../config/Constants.php';
 
-require_once ROOT_PATH . '/classes/User.php';
-require_once ROOT_PATH . '/classes/Session.php';
+require_once ROOT_PATH . 'classes/User.php';
+require_once ROOT_PATH . 'classes/Session.php';
 
 class Auth {
   public User $users;

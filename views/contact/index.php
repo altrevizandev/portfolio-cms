@@ -1,7 +1,7 @@
 <?php 
   require_once '../../config/Constants.php';
 
-  require_once ROOT_PATH . '../classes/Contacts.php';
+  require_once ROOT_PATH . 'classes/Contacts.php';
 
   $cts = new Contacts();
 

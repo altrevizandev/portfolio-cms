@@ -1,7 +1,7 @@
 <?php 
   require_once '../../config/Constants.php';
 
-  require_once ROOT_PATH . '../classes/Projects.php';
+  require_once ROOT_PATH . 'classes/Projects.php';
 
   if (!isset($_GET['project_id'])) {
     header('Location: /views/projects');

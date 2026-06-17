@@ -2,10 +2,10 @@
 
 require_once '../../config/Constants.php';
 
-require_once ROOT_PATH . '../classes/Stacks.php';
-require_once ROOT_PATH . '../classes/SectionOne.php';
-require_once ROOT_PATH . '../classes/SectionTwo.php';
-require_once ROOT_PATH . '../classes/SectionThree.php';
+require_once ROOT_PATH . 'classes/Stacks.php';
+require_once ROOT_PATH . 'classes/SectionOne.php';
+require_once ROOT_PATH . 'classes/SectionTwo.php';
+require_once ROOT_PATH . 'classes/SectionThree.php';
 
 $st = new Stacks();
 
