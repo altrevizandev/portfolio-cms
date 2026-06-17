@@ -97,11 +97,15 @@
           <input type="text" name="stack_icon" class="form-control" placeholder="Entre com o icone da stack" value="<?= $stackDetails['icon'] ?>">
         </div>
         <div class="mb-3 d-flex align-items-center justify-content-between">
-          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-            <button class="btn btn-primary btn-sm" name="update_stack">Salvar</button>
-          <?php } else { ?>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+              <button class="btn btn-primary btn-sm" name="update_stack">Salvar</button>
+            <?php } else { ?>
+              <button disabled class="btn btn-primary btn-sm" name="update_stack">Salvar</button>
+            <?php } ?>
+          <?php else: ?>
             <button disabled class="btn btn-primary btn-sm" name="update_stack">Salvar</button>
-          <?php } ?>
+          <?php endif; ?>
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Deletar
@@ -123,8 +127,16 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
               <form action="/actions/deleteStack.php" method="post">
                 <input name="stack_id" type="text" hidden value="<?= $stackDetails['id'] ?>">
-                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                  <button type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
+                <?php if (isset($_SESSION['user'])) { ?>
+                  <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+                    <button disabled type="submit" name="delete_stack" class="btn btn-danger">
+                      Sim, quero deletar
+                    </button>
+                  <?php else: ?>
+                    <button type="submit" name="delete_stack" class="btn btn-danger">
+                      Sim, quero deletar
+                    </button>
+                  <?php endif; ?>
                 <?php } else { ?>
                   <button disabled type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
                 <?php } ?>

@@ -141,6 +141,8 @@
               <?php } else { ?>
                 <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
               <?php } ?>
+            <?php else : ?>
+              <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
             <?php endif; ?>
           </div>
         </form> 

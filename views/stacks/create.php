@@ -80,11 +80,15 @@
           <input type="text" name="stack_icon" class="form-control" placeholder="Entre com o icone da stack" required>
         </div>
         <div class="d-grid d-md-block">
-          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-            <button class="btn btn-primary btn-sm" name="create_stack">Salvar</button>
-          <?php } else { ?>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+              <button class="btn btn-primary btn-sm" name="create_stack">Salvar</button>
+            <?php } else { ?>
+              <button disabled class="btn btn-primary btn-sm" name="create_stack">Salvar</button>
+            <?php } ?>
+          <?php else : ?>
             <button disabled class="btn btn-primary btn-sm" name="create_stack">Salvar</button>
-          <?php } ?>
+          <?php endif; ?>
         </div>
       </form>
     </div>

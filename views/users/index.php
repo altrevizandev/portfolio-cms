@@ -127,11 +127,13 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <form action="/actions/deleteUser.php" method="post">
                           <input name="user_id" type="text" hidden value="<?= $user['id'] ?>">
-                          <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == "admin") { ?>
-                            <button type="submit" name="delete_user" class="btn btn-danger">Sim, quero deletar</button>
-                          <?php } else { ?>
+                          <?php if (isset($_SESSION['user'])) : ?>
+                            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+                              <button type="submit" name="delete_user" class="btn btn-danger">Sim, quero deletar</button>
+                            <?php endif; ?>
+                          <?php else: ?>
                             <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>
-                          <?php } ?>
+                          <?php endif; ?>
                         </form>
                       </div>
                     </div>

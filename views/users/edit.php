@@ -132,14 +132,25 @@
             </select>
           </div>
           <div>
-            <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == 'admin') { ?>
-              <div class="d-grid d-md-block">
-                <button
-                  name="update_user"
-                  type="submit"
-                  class="btn btn-primary w-100 w-md-auto"
-                >Salvar</button>
-              </div>  
+            <?php if (isset($_SESSION['user'])) { ?>
+              <?php if ($_SESSION['user']['user_role'] == 'admin') : ?>
+                <div class="d-grid d-md-block">
+                  <button
+                    name="update_user"
+                    type="submit"
+                    class="btn btn-primary w-100 w-md-auto"
+                  >Salvar</button>
+                </div>  
+              <?php else: ?>
+                <div class="d-grid d-md-block">
+                  <button
+                    name="update_user"
+                    type="submit"
+                    class="btn btn-primary w-100 w-md-auto"
+                    disabled
+                  >Salvar</button>
+                </div>
+              <?php endif; ?>
             <?php } else { ?>
               <div class="d-grid d-md-block">
                 <button
