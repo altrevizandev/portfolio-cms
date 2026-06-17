@@ -126,11 +126,15 @@
           <input type="file" class="form-control" aria-label="file example" required name="prj_thumbnail" accept="image/*">
         </div>
         <div class="mb-3">
-          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-            <button type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
-          <?php } else { ?>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+              <button type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
+            <?php } else { ?>
+              <button disabled type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
+            <?php } ?>
+          <?php else: ?>
             <button disabled type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
-          <?php } ?>
+          <?php endif; ?>
         </div>
       </form>
     </div>

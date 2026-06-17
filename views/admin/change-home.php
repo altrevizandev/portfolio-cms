@@ -166,11 +166,15 @@ $formations = $sectionThree->getFormations();
                   </div>
                 </div>
                 <div>
-                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                    <button name="create_section_one" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                    <?php } else { ?>
+                  <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                      <button name="create_section_one" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                      <?php } else { ?>
+                      <button name="create_section_one" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                    <?php } ?>
+                  <?php else : ?>
                     <button name="create_section_one" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                  <?php } ?>
+                  <?php endif; ?>
                 </div>
               </form>
             </div>
@@ -267,15 +271,26 @@ $formations = $sectionThree->getFormations();
                   </div>
                 </div>
                 <div>
-                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                    <button
-                      class="btn btn-primary btn-sm"
-                      type="submit"
-                      name="update_section_one"
-                    >
-                      Salvar
-                    </button>
-                  <?php } else { ?>
+                  <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                      <button
+                        class="btn btn-primary btn-sm"
+                        type="submit"
+                        name="update_section_one"
+                      >
+                        Salvar
+                      </button>
+                    <?php } else { ?>
+                      <button
+                        class="btn btn-primary btn-sm"
+                        type="submit"
+                        name="update_section_one"
+                        disabled
+                      >
+                        Salvar
+                      </button>
+                    <?php } ?>
+                  <?php else : ?>
                     <button
                       class="btn btn-primary btn-sm"
                       type="submit"
@@ -284,8 +299,7 @@ $formations = $sectionThree->getFormations();
                     >
                       Salvar
                     </button>
-
-                  <?php } ?>
+                  <?php endif; ?>
                 </div>
               </form>
             </div>
@@ -392,7 +406,15 @@ $formations = $sectionThree->getFormations();
                   <input type="file" class="form-control" aria-label="file example" required name="image" accept="image/*" id="st-create-image-input">
                   <img src="#" class="img-thumbnail mt-3" alt="Imagem sessão 2" style="width: 25rem;" id="st-create-image-preview">
                 </div>
-                <button name="create_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                <?php if (isset($_SESSION['user'])) : ?>
+                  <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+                    <button name="create_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    <?php } else { ?>
+                    <button name="create_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                  <?php } ?>
+                <?php else : ?>
+                   <button name="create_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                <?php endif; ?>
               </form>
             </div>
           </div>
@@ -430,11 +452,15 @@ $formations = $sectionThree->getFormations();
                         <button id="st-change-cancel-change-image-btn" type="button" class="btn btn-link btn-sm text-danger">Cancelar troca de imagem</button>
                       </div>
                     </div>
-                    <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                      <button name="update_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                    <?php } else { ?>
+                    <?php if (isset($_SESSION['user'])) : ?>
+                      <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                        <button name="update_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                      <?php } else { ?>
+                        <button name="update_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                      <?php } ?>
+                    <?php else : ?>
                       <button name="update_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                    <?php } ?>
+                    <?php endif; ?>
                   </form>
               </div>
             </div>
@@ -549,11 +575,15 @@ $formations = $sectionThree->getFormations();
                                   <input class="form-control st-end-date" type="date" name="final_date" id="st-end-date-<?= $experience['id'] ?>" value="<?= date('Y-m-d', strtotime($experience['final_date'])) ?>" />
                                 </div>
                               </div>
-                              <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                                <button name="update_pro_exp" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                              <?php } else { ?>
+                              <?php if (isset($_SESSION['user'])) : ?>
+                                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                                  <button name="update_pro_exp" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                                <?php } else { ?>
+                                  <button name="update_pro_exp" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                                <?php } ?>
+                              <?php else : ?>
                                 <button name="update_pro_exp" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                              <?php } ?>
+                              <?php endif; ?>
                             </form>
                           </div>
                         </div>
@@ -617,11 +647,15 @@ $formations = $sectionThree->getFormations();
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                               <form action="/actions/deleteProExp.php" method="post">
                                 <input name="exp_id" type="text" hidden value="<?= $experience['id'] ?>">
-                                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                                  <button type="submit" name="delete_pro_exp" class="btn btn-danger">Sim, quero remover</button>
-                                <?php } else { ?>
+                                <?php if (isset($_SESSION['user'])) : ?>
+                                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                                    <button type="submit" name="delete_pro_exp" class="btn btn-danger">Sim, quero remover</button>
+                                  <?php } else { ?>
+                                    <button type="submit" name="delete_pro_exp" class="btn btn-danger" disabled>Sim, quero remover</button>
+                                  <?php } ?>
+                                <?php else : ?>
                                   <button type="submit" name="delete_pro_exp" class="btn btn-danger" disabled>Sim, quero remover</button>
-                                <?php } ?>
+                                <?php endif; ?>
                               </form>
                             </div>
                           </div>
@@ -678,11 +712,15 @@ $formations = $sectionThree->getFormations();
                           <input class="form-control" type="date" name="final_date"/>
                         </div>
                       </div>
-                      <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                        <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                      <?php } else { ?>
+                      <?php if (isset($_SESSION['user'])) : ?>
+                        <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                          <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                        <?php } else { ?>
+                          <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                        <?php } ?>
+                      <?php else: ?>
                         <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                      <?php } ?>
+                      <?php endif; ?>
                     </form>
                   </div>
                 </div>
@@ -785,11 +823,15 @@ $formations = $sectionThree->getFormations();
                             <input class="form-control" type="date" name="final_date" value="<?= date('Y-m-d', strtotime($formation['final_date'])) ?>"/>
                           </div>
                         </div>
-                        <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                          <button name="update-formation" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                        <?php } else { ?>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                            <button name="update-formation" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                          <?php } else { ?>
+                            <button name="update-formation" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                          <?php } ?>
+                        <?php else : ?>
                           <button name="update-formation" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                        <?php } ?>
+                        <?php endif; ?>
                       </form>
                     </div>
                   </div>
@@ -846,11 +888,15 @@ $formations = $sectionThree->getFormations();
                   <input class="form-control" type="date" name="final_date"/>
                 </div>
               </div>
-              <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                <button class="btn btn-primary btn-sm" type="submit" name="create-formation">Salvar</button>
-              <?php } else { ?>
+              <?php if (isset($_SESSION['user'])) : ?>
+                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                  <button class="btn btn-primary btn-sm" type="submit" name="create-formation">Salvar</button>
+                <?php } else { ?>
+                  <button class="btn btn-primary btn-sm" type="submit" name="create-formation" disabled>Salvar</button>
+                <?php } ?>
+              <?php else : ?>
                 <button class="btn btn-primary btn-sm" type="submit" name="create-formation" disabled>Salvar</button>
-              <?php } ?>
+              <?php endif; ?>
             </form>
           </div>
         </div>
@@ -889,11 +935,15 @@ $formations = $sectionThree->getFormations();
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                       <form action="/actions/deleteFormation.php" method="post">
                         <input name="formation_id" type="text" hidden value="<?= $formation['id'] ?>">
-                        <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                          <button type="submit" name="delete-formation" class="btn btn-danger">Sim, quero remover</button>
-                        <?php } else { ?>
+                        <?php if (isset($_SESSION['user'])) : ?>
+                          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                            <button type="submit" name="delete-formation" class="btn btn-danger">Sim, quero remover</button>
+                          <?php } else { ?>
+                            <button type="submit" name="delete-formation" class="btn btn-danger" disabled>Sim, quero remover</button>
+                          <?php } ?>
+                        <?php else: ?>
                           <button type="submit" name="delete-formation" class="btn btn-danger" disabled>Sim, quero remover</button>
-                        <?php } ?>
+                        <?php endif; ?>
                       </form>
                     </div>
                   </div>

@@ -166,11 +166,15 @@
           </div>
         </div>
         <div class="d-grid d-md-block">
-          <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-            <button id="submit_form_btn" type="submit" name="update_project" class="btn btn-warning btn-sm">Salvar</button>
-          <?php } else { ?>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+              <button id="submit_form_btn" type="submit" name="update_project" class="btn btn-warning btn-sm">Salvar</button>
+            <?php } else { ?>
+              <button disabled id="submit_form_btn" type="submit" name="update_project" class="btn btn-warning btn-sm">Salvar</button>
+            <?php } ?>
+          <?php else : ?>
             <button disabled id="submit_form_btn" type="submit" name="update_project" class="btn btn-warning btn-sm">Salvar</button>
-          <?php } ?>
+          <?php endif; ?>
         </div>
       </form>
     </div>

@@ -148,11 +148,15 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
               <form action="/actions/deleteStack.php" method="post">
                 <input name="stack_id" type="text" hidden value="<?= $projectDetails['id'] ?>">
-                <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                  <button type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
-                <?php } else { ?>
+                <?php if (isset($_SESSION['user'])) : ?>
+                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                    <button type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
+                  <?php } else { ?>
+                    <button disabled type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
+                  <?php } ?>
+                <?php else: ?>
                   <button disabled type="submit" name="delete_stack" class="btn btn-danger">Sim, quero deletar</button>
-                <?php } ?>
+                <?php endif; ?>
               </form>
             </div>
           </div>

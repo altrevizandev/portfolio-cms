@@ -151,11 +151,15 @@
                   <input class="form-control" type="text" name="linkedin" placeholder="https://" value="<?=  $contact['linkedin'] ?>">
                 </div>
                 <div>
-                  <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
-                    <button name="update_contact" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                  <?php } else {?>
+                  <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+                      <button name="update_contact" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    <?php } else {?>
+                      <button disabled name="update_contact" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    <?php } ?>
+                  <?php else: ?>
                     <button disabled name="update_contact" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                  <?php } ?>
+                  <?php endif; ?>
                 </div>
               </form>
             </div>
