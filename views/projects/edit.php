@@ -3,7 +3,9 @@
   require_once ROOT_PATH . '../classes/Projects.php';
   require_once ROOT_PATH . '../classes/Stacks.php';
 
-  $stacks = new Stacks()->listStacks();
+  $st = new Stacks();
+
+  $stacks = $st->listStacks();
 
   if (!isset($_GET['project_id'])) {
     header('Location: /views/projects');
@@ -11,8 +13,9 @@
   }
 
   $project_id = $_GET['project_id'];
+  $prj = new Project();
 
-  $projectDetails = new Project()->findById($project_id);
+  $projectDetails = $prj->findById($project_id);
 ?>
 
 <!doctype html>

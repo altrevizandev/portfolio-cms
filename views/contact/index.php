@@ -3,7 +3,9 @@
 
   require_once ROOT_PATH . '../classes/Contacts.php';
 
-  $contacts = new Contacts()->getContacts();
+  $cts = new Contacts();
+
+  $contacts = $cts->getContacts();
 ?>
 
 <!doctype html>

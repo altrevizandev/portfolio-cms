@@ -15,7 +15,9 @@
 
   $stackId = trim($_GET['stack_id']);
 
-  $stackDetails = new Stacks()->findById($stackId);
+  $st = new Stacks();
+
+  $stackDetails = $st->findById($stackId);
 ?>
 
 <!doctype html>

@@ -3,14 +3,16 @@
 
   require_once ROOT_PATH . '../classes/Projects.php';
 
+  $prj = new Project(); 
+
   if(isset($_GET['disabled_projects'])) {
     if ($_GET['disabled_projects'] == "true") {
-      $projects = new Project()->listProjects(true);
+      $projects = $prj->listProjects(true);
     } else {
-      $projects = new Project()->listProjects(false);
+      $projects = $prj->listProjects(false);
     }
   } else {
-    $projects = new Project()->listProjects(false);
+    $projects = $prj->listProjects(false);
   }
 ?>
 

@@ -3,7 +3,9 @@
 
   require_once ROOT_PATH . '../classes/Stacks.php';
 
-  $stacks = new Stacks()->listStacks();
+  $st = new Stacks();
+
+  $stacks = $st->listStacks();
 ?>
 
 <!doctype html>

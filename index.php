@@ -6,7 +6,9 @@ require_once ROOT_PATH . '../classes/SectionOne.php';
 require_once ROOT_PATH . '../classes/SectionTwo.php';
 require_once ROOT_PATH . '../classes/SectionThree.php';
 
-$stacks = new Stacks()->listStacks();
+$st = new Stacks();
+
+$stacks = $st->listStacks();
 
 $sectionOne = new SectionOne();
 $sectionTwo = new SectionTwo();

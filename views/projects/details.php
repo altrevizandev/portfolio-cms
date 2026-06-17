@@ -10,9 +10,9 @@
 
   $project_id = $_GET['project_id'];
 
-  $projectDetails = new Project()->findById($project_id);
+  $prj = new Project();
 
-  /* print_r($projectDetails);exit; */
+  $projectDetails = $prj->findById($project_id);
 ?>
 
 <!doctype html>
