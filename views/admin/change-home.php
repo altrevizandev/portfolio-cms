@@ -175,13 +175,13 @@ $formations = $sectionThree->getFormations();
               </form>
             </div>
           </div>
-        <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdropSession1" aria-labelledby="staticBackdropLabel">
-          <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="staticBackdropLabel">Editando seção #1</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <?php if ($sectionOneData != null) : ?>
+        <?php if ($sectionOneData != null) : ?>
+          <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdropSession1" aria-labelledby="staticBackdropLabel">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title" id="staticBackdropLabel">Editando seção #1</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
               <form
                 action="/actions/updateSectionOne.php"
                 method="post"
@@ -288,9 +288,9 @@ $formations = $sectionThree->getFormations();
                   <?php } ?>
                 </div>
               </form>
-            <?php endif; ?>
+            </div>
           </div>
-        </div>
+        <?php endif; ?>
       </div>
       <?php if ($sectionOneData != null) { ?>
         <div class="
