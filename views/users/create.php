@@ -131,13 +131,17 @@
             </select>
           </div>
           <div class="d-grid d-md-block">
-            <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == 'admin') { ?>
-              <button
-                name="create_user"
-                class="btn btn-primary" type="submit">Criar</button>
-            <?php } else { ?>
-              <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
-            <?php } ?>
+            <?php if (isset($_SESSION['user'])) : ?>
+              <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+                <button
+                  name="create_user"
+                  class="btn btn-primary" type="submit">
+                  Criar
+                </button>
+              <?php } else { ?>
+                <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
+              <?php } ?>
+            <?php endif; ?>
           </div>
         </form> 
       </div>
