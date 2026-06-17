@@ -1,0 +1,22 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio-cms
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      DB_HOST: flowaccess-postgres
+      DB_PORT: 5432
+      DB_NAME: portfolio
+      DB_USER: portfolio_user
+      DB_PASSWORD: Alt@839517240999
+
+    networks:
+      - api_default
+
+networks:
+  api_default:
+    external: true
