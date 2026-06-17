@@ -158,4 +158,38 @@ CREATE TABLE IF NOT EXISTS section_stacks (
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-); 
+);
+
+INSERT INTO users (
+    user_name,
+    user_email,
+    user_birth_date,
+    user_password,
+    user_description,
+    user_role
+)
+VALUES (
+    'Andre Lucas Trevizan',
+    'altrevizan.dev@gmail.com',
+    '2000-03-27',
+    '$2y$10$uF7Gx7XoOoGONyOQsXDcKu52S0.shMbiraU7XSs2NUoTDJ0pqOaxm',
+    'Desenvolvedor Backend com experiência em PHP, Node.js, PostgreSQL e integrações corporativas. Atualmente atuo na Tirol participando da gestão de demandas de tecnologia, desenvolvimento de APIs REST, automação de processos e integração entre sistemas SAP e aplicações corporativas. Possuo experiência com Docker, Linux, SQL Server, Oracle Database, Fastify, APIs REST e arquitetura de integrações.',
+    'admin'
+);
+
+INSERT INTO users (
+    user_name,
+    user_email,
+    user_birth_date,
+    user_password,
+    user_description,
+    user_role
+)
+VALUES (
+    'Visualizador',
+    'portfolioviewer@gmail.com',
+    '2000-03-27',
+    '$2y$10$L57tGAhYXbEqxhRIHwkzs.U19cKZUh61jad.SjdcJiGbL7QcUmTZm',
+    'Usuário de demonstração para acesso ao portfólio.',
+    'viewer'
+);

@@ -1,0 +1,37 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio-dev
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - .:/var/www/html
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: portfolio
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+
+    environment:
+      POSTGRES_DB: portfolio
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+
+volumes:
+  postgres_dev:

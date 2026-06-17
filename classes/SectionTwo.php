@@ -68,21 +68,25 @@ class SectionTwo {
     $db_result_array_section_two = pg_fetch_all($result_section_two);
     $db_result_array_section_two_experiences = pg_fetch_all($result_section_two_experiences);
 
-    foreach ($db_result_array_section_two_experiences as $row) {
-      array_push($section_data['experiences'], [
-        "id" => $row['id'],               
-        "company" => $row['company'],               
-        "description" => $row['description'],               
-        "actual_job" => $row['actual_job'],               
-        "start_date" => $row['start_date'],               
-        "final_date" => $row['final_date']               
-      ]);
+    if (count($db_result_array_section_two) > 0 && count($db_result_array_section_two_experiences) > 0) {
+      foreach ($db_result_array_section_two_experiences as $row) {
+        array_push($section_data['experiences'], [
+          "id" => $row['id'],               
+          "company" => $row['company'],               
+          "description" => $row['description'],               
+          "actual_job" => $row['actual_job'],               
+          "start_date" => $row['start_date'],               
+          "final_date" => $row['final_date']               
+        ]);
+      }
+
+      $section_data['image'] = $db_result_array_section_two['image'];
+      $section_data['section_id'] = $db_result_array_section_two['id'];
+
+      return $section_data;
+    } else {
+      return [];
     }
-
-    $section_data['image'] = $db_result_array_section_two[0]['image'];
-    $section_data['section_id'] = $db_result_array_section_two[0]['id'];
-
-    return $section_data;
   }
 
   public function createSectionTwo(

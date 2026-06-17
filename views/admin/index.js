@@ -1,4 +1,6 @@
 const setPreviewImage = (e, img) => {
+  console.log(e);
+  
   const files = e.target.files;
 
   if (files.length > 0) {
@@ -15,7 +17,7 @@ const setPreviewImage = (e, img) => {
 }
 
 const toggleVisibilitty = (e) => {
-  let oldClass = e.getAttribute('class');
+  let oldClass = e?.getAttribute('class');
 
   if (oldClass) {
     if (oldClass.includes('visually-hidden')) {
@@ -26,7 +28,7 @@ const toggleVisibilitty = (e) => {
       e.setAttribute('class', `${oldClass} visually-hidden`);
     }
   } else {
-    e.setAttribute('class', 'visually-hidden');
+    e?.setAttribute('class', 'visually-hidden');
   }
 }
 
@@ -35,7 +37,7 @@ const toggleJobDateAreasVisibilitty = (e, div) => {
 }
 
 const toggleChangeImage = (e, imgArea) => {
-  if (e.checked) {
+  if (e?.checked) {
     toggleVisibilitty(imgArea);
   } else {
     toggleVisibilitty(imgArea);
@@ -68,7 +70,7 @@ let soCreateImgInput = document.getElementById("so-create-image-input");
 let soCreateImg = document.getElementById("so-create-image-preview");
 
 soCreateImgInput.addEventListener('change', (e) => {
-  setPreviewImage(soCreateImgInput, soCreateImg);
+  setPreviewImage(e, soCreateImg);
 });
 
 //Edição
@@ -77,7 +79,7 @@ soCreateImgInput.addEventListener('change', (e) => {
 let soChangeImgCheckInput = document.getElementById("so-change-img-check-input");
 let soChangeImgArea = document.getElementById("so-change-img-area");
 let soChangeCancelChangeImageBtn = document.getElementById("so-change-cancel-change-image-btn");
-let soChangeOldImage = document.getElementById("so-change-old-image").value;
+let soChangeOldImage = document.getElementById("so-change-old-image")?.value ?? "";
 
 toggleChangeImage(soChangeImgCheckInput,
   soChangeImgArea
@@ -87,7 +89,7 @@ toggleChangeImage(soChangeImgCheckInput,
   soChangeCancelChangeImageBtn
 );
 
-soChangeImgCheckInput.addEventListener('change', (e) => {
+soChangeImgCheckInput?.addEventListener('change', (e) => {
   toggleChangeImage(e, soChangeImgArea);
   toggleChangeImage(e, soChangeCancelChangeImageBtn);
 });
@@ -96,12 +98,12 @@ soChangeImgCheckInput.addEventListener('change', (e) => {
 let soChangeImgInput = document.getElementById("so-change-image-input");
 let soChangeImg = document.getElementById("so-change-image-preview");
 
-soChangeImgInput.addEventListener('change', (e) => {
+soChangeImgInput?.addEventListener('change', (e) => {
   setPreviewImage(e, soChangeImg);
 });
 
 //Cancelar troca da imagem
-soChangeCancelChangeImageBtn.addEventListener('click', (e) => {
+soChangeCancelChangeImageBtn?.addEventListener('click', (e) => {
   cancelChangeOfImages(
     soChangeImg,
     soChangeImgInput,
@@ -247,7 +249,7 @@ let stChangeImg = document.getElementById("st-change-image-preview");
 let stChangeImgInput = document.getElementById("st-change-image-input");
 let stChangeImgCheckInput = document.getElementById("st-change-img-check-input");
 let stChangeImgArea = document.getElementById("st-change-img-area");
-let stChangeOldImage = document.getElementById("st-change-old-image").value;
+let stChangeOldImage = document.getElementById("st-change-old-image")?.value ?? "";
 let stChangeImagePreviewImg = document.getElementById("st-change-image-preview");
 let stChangeCancelChangeImageBtn = document.getElementById("st-change-cancel-change-image-btn");
 
@@ -259,17 +261,17 @@ toggleChangeImage(stChangeImgCheckInput,
   stChangeCancelChangeImageBtn
 );
 
-stChangeImgCheckInput.addEventListener('change', (e) => {
+stChangeImgCheckInput?.addEventListener('change', (e) => {
   toggleChangeImage(e, stChangeImgArea);
   toggleChangeImage(e, stChangeCancelChangeImageBtn);
 });
 
-stChangeImgInput.addEventListener('change', (e) => {
+stChangeImgInput?.addEventListener('change', (e) => {
   setPreviewImage(e, stChangeImg);
 });
 
 //Cancelar troca da imagem
-stChangeCancelChangeImageBtn.addEventListener('click', (e) => {
+stChangeCancelChangeImageBtn?.addEventListener('click', (e) => {
   cancelChangeOfImages(
     stChangeImg,
     stChangeImgInput,
@@ -289,7 +291,7 @@ let s3createDatesAreaDiv = document.getElementById("s3-create-dates-area");
 
 toggleVisibilitty(s3createSinceAreaDiv);
 
-s3createCheckStillStudyingInput.addEventListener('change', (checkbox) => {
+s3createCheckStillStudyingInput?.addEventListener('change', (checkbox) => {
   if (s3createCheckStillStudyingInput.checked) {
     toggleVisibilitty(s3createSinceAreaDiv);
     toggleVisibilitty(s3createDatesAreaDiv);

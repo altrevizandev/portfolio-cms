@@ -82,7 +82,7 @@
         <div class="d-flex flex-wrap gap-2">
           <a href="/views/projects/create.php" class="btn btn-success btn-sm align-self-start">Criar</a>
           <form action="/views/projects" method="get">
-            <?php if ($_GET['disabled_projects'] == "true") { ?>
+            <?php if (isset($_GET['disabled_projects']) && $_GET['disabled_projects'] == "true") { ?>
               <button type="submit" name="disabled_projects" class="btn btn-primary btn-sm" value="false">Ver projetos ativos</button>
             <?php } else { ?>
               <button type="submit" name="disabled_projects" class="btn btn-primary btn-sm" value="true">Ver projetos inativos</button>

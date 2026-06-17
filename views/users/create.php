@@ -131,7 +131,7 @@
             </select>
           </div>
           <div class="d-grid d-md-block">
-            <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == 'admin') { ?>
               <button
                 name="create_user"
                 class="btn btn-primary" type="submit">Criar</button>

@@ -202,7 +202,7 @@ $formations = $sectionThree->getFormations();
                       <label class="form-check-label" for="so-change-img-check-input">Quer mudar a imagem?</label>
                     </div>
                     <div id="so-change-img-area">
-                      <input type="hidden" name="old_image" value="<?= $sectionOneData['image'] ?>" id="so-change-old-image">
+                      <input type="hidden" name="old_image" value="<?= isset($sectionOneData['image']) ? $sectionOneData['image'] : "" ?>" id="so-change-old-image">
                       <label class="form-label">Imagem</label>
                       <input type="file" class="form-control" aria-label="file example" name="new_image" accept="image/*" id="so-change-image-input">
                     </div>
@@ -365,10 +365,12 @@ $formations = $sectionThree->getFormations();
       >
         <div>
           <div class="d-flex align-items-center gap-2 mb-3">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#editSectionTwoOffcanvas" aria-controls="editSectionTwoOffcanvas">
-              Editar essa seção
-            </button>
-            <?php if ($sectionTwoData['section_id'] == 0) : ?>
+            <?php if (isset($sectionTwoData['section_id'])) : ?>
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#editSectionTwoOffcanvas" aria-controls="editSectionTwoOffcanvas">
+                Editar essa seção
+              </button>
+            <?php endif; ?>
+            <?php if (isset($sectionTwoData)) : ?>
               <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#createSectionTwoOffcanvas" aria-controls="createSectionTwoOffcanvas">
                 Criar seção
               </button>
@@ -394,56 +396,60 @@ $formations = $sectionThree->getFormations();
               </form>
             </div>
           </div>
-          <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="editSectionTwoOffcanvas" aria-labelledby="staticBackdropLabel">
-            <div class="offcanvas-header border-bottom">
-              <h5 class="offcanvas-title" id="staticBackdropLabel">Editando Seção #2</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <?php if (isset($sectionTwoData['section_id'])) : ?>
+            <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="editSectionTwoOffcanvas" aria-labelledby="staticBackdropLabel">
+              <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="staticBackdropLabel">Editando Seção #2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <h6 class="mb-3">Imagem da seção</h6>
+                  <form
+                    action="/actions/updateSectionTwoImage.php"
+                    enctype="multipart/form-data"
+                    method="post"
+                  >
+                    <input type="hidden" name="section_id" value="<?= $sectionTwoData['section_id'] ?>">
+                    <div class="mb-3 d-flex flex-column gap-3">
+                      <div clas="d-flex gap-2 align-items-center">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="st_change_img"
+                          id="st-change-img-check-input"
+                        >
+                        <label class="form-check-label" for="st-change-img-check-input">Quer mudar a imagem?</label>
+                      </div>
+                      <div id="st-change-img-area">
+                        <input type="hidden" name="old_image" value="<?= $sectionTwoData['section_id'] ?>" id="st-change-old-image">
+                        <label class="form-label">Imagem</label>
+                        <input type="file" class="form-control" aria-label="file example" name="image" accept="image/*" id="st-change-image-input">
+                      </div>
+                      <div>
+                        <img src="<?= $sectionTwoData['section_id'] ?>" class="img-thumbnail" alt="Image" style="width: 25rem;" id="st-change-image-preview">
+                        <button id="st-change-cancel-change-image-btn" type="button" class="btn btn-link btn-sm text-danger">Cancelar troca de imagem</button>
+                      </div>
+                    </div>
+                    <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                      <button name="update_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    <?php } else { ?>
+                      <button name="update_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
+                    <?php } ?>
+                  </form>
+              </div>
             </div>
-            <div class="offcanvas-body">
-              <h6 class="mb-3">Imagem da seção</h6>
-                <form
-                  action="/actions/updateSectionTwoImage.php"
-                  enctype="multipart/form-data"
-                  method="post"
-                >
-                  <input type="hidden" name="section_id" value="<?= $sectionTwoData['section_id'] ?>">
-                  <div class="mb-3 d-flex flex-column gap-3">
-                    <div clas="d-flex gap-2 align-items-center">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="st_change_img"
-                        id="st-change-img-check-input"
-                      >
-                      <label class="form-check-label" for="st-change-img-check-input">Quer mudar a imagem?</label>
-                    </div>
-                    <div id="st-change-img-area">
-                      <input type="hidden" name="old_image" value="<?= $sectionTwoData['image'] ?>" id="st-change-old-image">
-                      <label class="form-label">Imagem</label>
-                      <input type="file" class="form-control" aria-label="file example" name="image" accept="image/*" id="st-change-image-input">
-                    </div>
-                    <div>
-                      <img src="<?= $sectionTwoData['image'] ?>" class="img-thumbnail" alt="Image" style="width: 25rem;" id="st-change-image-preview">
-                      <button id="st-change-cancel-change-image-btn" type="button" class="btn btn-link btn-sm text-danger">Cancelar troca de imagem</button>
-                    </div>
-                  </div>
-                  <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
-                    <button name="update_section_two" class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                  <?php } else { ?>
-                    <button name="update_section_two" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
-                  <?php } ?>
-                </form>
-            </div>
-          </div>
+          <?php endif; ?>
           <div class="d-flex flex-column gap-3">
             <div class="d-flex align-items-center gap-2">
               <h3>Experiencia Profissional</h3>
               <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#createExpProfessionalOffcanvas" aria-controls="createExpProfessionalOffcanvas">
                 Criar
               </button>
-              <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditProExp" aria-controls="offcanvasEditProExp">
-                Editar
-              </button>
+              <?php if (isset($sectionTwoData['experiences']) && count($sectionTwoData['experiences']) > 0) : ?>
+                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditProExp" aria-controls="offcanvasEditProExp">
+                  Editar
+                </button>
+              <?php endif; ?>
               <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="createExpProfessionalOffcanvas" aria-labelledby="staticBackdropLabel">
                 <div class="offcanvas-header border-bottom">
                   <h5 class="offcanvas-title" id="staticBackdropLabel">Criando Experiencia Profissional</h5>
@@ -454,7 +460,7 @@ $formations = $sectionThree->getFormations();
                     action="/actions/createProfessionalExperience.php"
                     method="post"
                   >
-                    <input type="hidden" name="section_id" value="<?= $sectionTwoData['section_id'] ?>">
+                    <input type="hidden" name="section_id" value="<?= isset($sectionTwoData['section_id']) ? $sectionTwoData['section_id'] : "" ?>">
                     <div class="mb-3">
                       <label class="form-label">Empresa ou local de trabalho</label>
                       <input class="form-control" type="text" name="company" placeholder="Entre com o nome do lugar onde você trabalhou">
@@ -483,7 +489,7 @@ $formations = $sectionThree->getFormations();
                         <input class="form-control" type="date" name="final_date"/>
                       </div>
                     </div>
-                    <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == "admin") { ?>
                       <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit">Salvar</button>
                     <?php } else { ?>
                       <button name="create_pro_exp" class="btn btn-primary btn-sm" type="submit" disabled>Salvar</button>
@@ -492,7 +498,7 @@ $formations = $sectionThree->getFormations();
                 </div>
               </div>
             </div>
-            <?php if (count($sectionTwoData['experiences']) > 0) { ?>
+            <?php if (isset($sectionTwoData['experiences']) && count($sectionTwoData['experiences']) > 0) { ?>
               <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="offcanvasEditProExp" aria-labelledby="staticBackdropLabel">
                 <div class="offcanvas-header border-bottom">
                   <h5 class="offcanvas-title" id="staticBackdropLabel">Editando seção #2</h5>
@@ -685,7 +691,7 @@ $formations = $sectionThree->getFormations();
             <?php } ?>
           </div>
         </div>
-        <?php if ($sectionTwoData['image']) : ?>
+        <?php if (isset($sectionTwoData['image'])) : ?>
           <img
             src="<?= $sectionTwoData['image'] ?>"
             class="img-fluid rounded-4"
@@ -696,9 +702,11 @@ $formations = $sectionThree->getFormations();
       </div>
       <hr>
       <div>
-        <button class="btn btn-primary mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdropSession3" aria-controls="staticBackdropSession3">
-          Editar essa seção
-        </button>
+        <?php if (count($formations) > 0) : ?>
+          <button class="btn btn-primary mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdropSession3" aria-controls="staticBackdropSession3">
+            Editar essa seção
+          </button>
+        <?php endif; ?>
         <button class="btn btn-primary mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#createFormationOffcanvas" aria-controls="createFormationOffcanvas">
           Criar formação
         </button>

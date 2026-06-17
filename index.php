@@ -120,38 +120,40 @@ $formations = $sectionThree->getFormations();
       <?php } ?>
       <hr>
       <div class="d-flex flex-column-reverse flex-lg-row justify-content-between gap-5">
-        <?php if (count($sectionTwoData['experiences']) > 0) { ?>
-          <div class="d-flex flex-column gap-3">
-            <?php foreach($sectionTwoData['experiences'] as $experience) : ?>
-              <div class="d-flex flex-column">
-                <div class="d-flex gap-3 align-items-center">
-                  <h5><?= $experience['company'] ?></h5>
-                  <div class="d-flex flex-column gap-2 text-sm">
-                    <?php if ($experience['actual_job'] == 't') { ?>
-                      <span class="badge text-bg-primary"><?= date('d/m/Y', strtotime($experience['start_date'])) ?> - atual</span>
-                    <?php } else { ?>
-                      <span
-                        class="badge text-bg-primary"
-                      ><?= date('d/m/Y', strtotime($experience['start_date'])) ?> - <?= date('d/m/Y', strtotime($experience['final_date'])) ?>
-                      </span>
-                    <?php } ?>
+        <?php if ($sectionTwoData != null) : ?>
+          <?php if (count($sectionTwoData['experiences']) > 0) { ?>
+            <div class="d-flex flex-column gap-3">
+              <?php foreach($sectionTwoData['experiences'] as $experience) : ?>
+                <div class="d-flex flex-column">
+                  <div class="d-flex gap-3 align-items-center">
+                    <h5><?= $experience['company'] ?></h5>
+                    <div class="d-flex flex-column gap-2 text-sm">
+                      <?php if ($experience['actual_job'] == 't') { ?>
+                        <span class="badge text-bg-primary"><?= date('d/m/Y', strtotime($experience['start_date'])) ?> - atual</span>
+                      <?php } else { ?>
+                        <span
+                          class="badge text-bg-primary"
+                        ><?= date('d/m/Y', strtotime($experience['start_date'])) ?> - <?= date('d/m/Y', strtotime($experience['final_date'])) ?>
+                        </span>
+                      <?php } ?>
+                    </div>
                   </div>
+                  <p style="text-align: justify;"><?= $experience['description'] ?></p>
                 </div>
-                <p style="text-align: justify;"><?= $experience['description'] ?></p>
-              </div>
-            <?php endforeach; ?>
-          </div>
-          <?php if ($sectionTwoData['image']) : ?>
-            <img
-              src="<?= $sectionTwoData['image'] ?>"
-              class="img-fluid rounded-4"
-              style="box-shadow: 0 0 40px rgba(0,0,0,.3); width: auto; max-height: 700px;"
-              alt="Imagem da seção 2"
-            />
-          <?php endif; ?>
-        <?php } else { ?>
-          <h5>As experiencias profissionais que você cadastrar vão aparecer aqui</h5>
-        <?php } ?>
+              <?php endforeach; ?>
+            </div>
+            <?php if ($sectionTwoData['image']) : ?>
+              <img
+                src="<?= $sectionTwoData['image'] ?>"
+                class="img-fluid rounded-4"
+                style="box-shadow: 0 0 40px rgba(0,0,0,.3); width: auto; max-height: 700px;"
+                alt="Imagem da seção 2"
+              />
+            <?php endif; ?>
+          <?php } else { ?>
+            <h5>As experiencias profissionais que você cadastrar vão aparecer aqui</h5>
+          <?php } ?>
+        <?php endif; ?>
       </div>
       <hr>
       <div class="d-flex flex-column align-items-center">

@@ -88,7 +88,7 @@ class SectionOne {
       }
     }
 
-    return $finalList[0];
+    return $finalList;
   }
 
   public function create(

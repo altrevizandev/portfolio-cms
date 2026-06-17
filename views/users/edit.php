@@ -132,7 +132,7 @@
             </select>
           </div>
           <div>
-            <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == 'admin') { ?>
               <div class="d-grid d-md-block">
                 <button
                   name="update_user"

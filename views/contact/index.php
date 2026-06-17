@@ -69,7 +69,7 @@
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
         <h3>Meios de entrar em contato comigo</h3>
         <?php if (count($contacts) == 0) { ?>
-          <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+          <?php if (isset($_SESSION['user']) && $_SESSION['user']['user_role'] == 'admin') { ?>
             <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdropSession1" aria-controls="staticBackdropSession1">
             Criar
             </button>
@@ -129,6 +129,7 @@
             </div>
             <div class="offcanvas-body">
               <form action="/actions/updateContact.php" method="post">
+                <input type="hidden" name="contact_id" value="<?= $contact['id'] ?>">
                 <div class="mb-3">
                   <div class="d-flex flex-column form-label">
                     <label>Telefone</label>
