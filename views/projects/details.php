@@ -123,6 +123,10 @@
               </span>
             <?php endforeach; ?>
         </div>
+        <h5>Desafio</h5>
+        <p><?= $projectDetails["prj_challenge"] ?></p>
+        <h5>Solução</h5>
+        <p><?= $projectDetails["prj_solution"] ?></p>
       </div>
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
