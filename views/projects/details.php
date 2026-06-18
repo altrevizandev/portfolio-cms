@@ -123,18 +123,6 @@
               </span>
             <?php endforeach; ?>
         </div>
-        <h5>Desafio</h5>
-        <p><?= $projectDetails["prj_challenge"] ?></p>
-        <h5>Solução</h5>
-        <p><?= $projectDetails["prj_solution"] ?></p>
-        <h5>Resultados</h5>
-        <ul>
-          <li>Redução do tempo de atendimento;</li>
-          <li>Menor dependência da equipe de suporte;</li>
-          <li>Processo disponível para utilização pelos usuários;</li>
-          <li>Integração segura com o ambiente SAP;</li>
-        </ul>
-      </div>
       <!-- Modal -->
       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
