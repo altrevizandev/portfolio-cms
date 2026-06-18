@@ -98,7 +98,7 @@ class Project {
     $result = pg_query_params($this->dbConnection, $sql, [
       $prj_title,
       $prj_description,
-      $prj_corporative,
+      $prj_corporative ? 't' : 'f',
       $prj_challenge,
       $prj_thumbnail,
       $prj_solution
@@ -155,39 +155,35 @@ class Project {
     $db_result_array = pg_fetch_all($result);
 
     $projects = [];
-    $stacks = [];
-    $finalList = [];
 
-    for ($count = 0; $count < count($db_result_array); $count++) { //12
-      if ($db_result_array[$count]['id'] == $db_result_array[$count+1]['id']) {
-        array_push(
-          $stacks, [
-            "id" => $db_result_array[$count]['stack_id'], "name" => $db_result_array[$count]['stack_name'],
-            "icon" => $db_result_array[$count]['stack_icon']
-          ]
-        );
-      } else {
-        array_push(
-          $stacks, [
-            "id" => $db_result_array[$count]['stack_id'], "name" => $db_result_array[$count]['stack_name'],
-            "icon" => $db_result_array[$count]['stack_icon']
-          ]
-        );
-        
-        array_push(
-          $projects, [
-            "id" => $db_result_array[$count]['id'], "prj_title" => $db_result_array[$count]['prj_title'],  "prj_description" => $db_result_array[$count]['prj_description'], "prj_thumbnail" => $db_result_array[$count]['prj_thumbnail'], "stacks" => $stacks, "prj_challenge" => $db_result_array[$count]['prj_challenge'], "prj_solution" => $db_result_array[$count]['prj_solution'], "prj_status" => $db_result_array[$count]['prj_status'], "prj_corporative" => $db_result_array[$count]['prj_corporative'],
-          ]
-        );
+    foreach ($db_result_array as $row) {
 
-        array_push($finalList, $projects[0]);
+      $projectId = $row['id'];
 
-        $projects = [];
-        $stacks = [];
+      if (!isset($projects[$projectId])) {
+        $projects[$projectId] = [
+          "id" => $row['id'],
+          "prj_title" => $row['prj_title'],
+          "prj_description" => $row['prj_description'],
+          "prj_thumbnail" => $row['prj_thumbnail'],
+          "prj_challenge" => $row['prj_challenge'],
+          "prj_solution" => $row['prj_solution'],
+          "prj_status" => $row['prj_status'],
+          "prj_corporative" => $row['prj_corporative'],
+          "stacks" => []
+        ];
+      }
+
+      if (!empty($row['stack_id'])) {
+        $projects[$projectId]['stacks'][] = [
+          "id" => $row['stack_id'],
+          "name" => $row['stack_name'],
+          "icon" => $row['stack_icon']
+        ];
       }
     }
 
-    return $finalList[0];
+    return array_values($projects)[0];
   }
 
   public function listProjects(Bool $prj_status = true) {
@@ -217,36 +213,32 @@ class Project {
     $db_result_array = pg_fetch_all($result);
 
     $projects = [];
-    $stacks = [];
-    $finalList = [];
 
-    for ($count = 0; $count < count($db_result_array); $count++) { //12
-      if ($db_result_array[$count]['id'] == $db_result_array[$count+1]['id']) {
+    foreach ($db_result_array as $row) {
+
+      $id = $row['id'];
+
+      if (!isset($projects[$id])) {
+        $projects[$id] = [
+          'id' => $row['id'],
+          'prj_title' => $row['prj_title'],
+          'prj_description' => $row['prj_description'],
+          'prj_thumbnail' => $row['prj_thumbnail'],
+          'stacks' => []
+        ];
+      }
+
+      if ($row['stack_name']) {
         array_push(
-          $stacks, [
-            "stack_name" => $db_result_array[$count]['stack_name'], "stack_icon" => $db_result_array[$count]['stack_icon']
+          $projects[$id]['stacks'],
+          [
+            'stack_name' => $row['stack_name'],
+            'stack_icon' => $row['stack_icon']
           ]
         );
-      } else {
-        array_push(
-          $stacks, [
-            "stack_name" => $db_result_array[$count]['stack_name'], "stack_icon" => $db_result_array[$count]['stack_icon']
-          ]
-        );
-        
-        array_push(
-          $projects, [
-            "id" => $db_result_array[$count]['id'], "prj_title" => $db_result_array[$count]['prj_title'],  "prj_description" => $db_result_array[$count]['prj_description'], "prj_thumbnail" => $db_result_array[$count]['prj_thumbnail'], "stacks" => $stacks
-          ]
-        );
-
-        array_push($finalList, $projects[0]);
-
-        $projects = [];
-        $stacks = [];
       }
     }
 
-    return $finalList; 
+    return array_values($projects); 
   }
 }

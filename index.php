@@ -74,7 +74,7 @@ $formations = $sectionThree->getFormations();
           <img
             src="<?= $sectionOneData['image'] ?>"
             class="img-fluid rounded-4"
-            style="box-shadow: 0 0 40px rgba(0,0,0,.3); max-width: 500px;"
+            style="box-shadow: 0 0 40px rgba(0,0,0,.3); width: auto; max-height: 700px;"
             alt="Andre"
           />
           <div>

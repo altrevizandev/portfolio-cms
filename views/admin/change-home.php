@@ -255,10 +255,10 @@ $formations = $sectionThree->getFormations();
                         <?php foreach( $stacks as $stack ) { ?>
                           <div class="form-check d-flex align-items-center gap-2">
                             <input class="form-check-input" type="checkbox" 
-                            value="<?= $stack['id'] ?>" name="stacks[]" id="check_<?= $stack['name'] ?>" <?= in_array($stack['id'], array_column($sectionOneData['stacks'], 'stack_id')) ? "checked" : "" ?>>
+                            value="<?= $stack['id'] ?>" name="stacks[]" id="check_<?= $stack['id'] ?>" <?= in_array($stack['id'], array_column($sectionOneData['stacks'], 'stack_id')) ? "checked" : "" ?>>
                             <span class="badge rounded-pill bg-white text-dark border px-3 py-2 shadow-sm">
                               <i class="<?= $stack['icon'] ?> me-1"></i>
-                              <label class="form-check-label" for="check_<?= $stack['name'] ?>">
+                              <label class="form-check-label" for="check_<?= $stack['id'] ?>">
                                 <?= $stack['name'] ?>
                               </label>
                             </span>
@@ -318,7 +318,7 @@ $formations = $sectionThree->getFormations();
           <img
             src="<?= $sectionOneData['image'] ?>"
             class="img-fluid rounded-4"
-            style="box-shadow: 0 0 40px rgba(0,0,0,.3); max-width: 500px; width:100%;"
+            style="box-shadow: 0 0 40px rgba(0,0,0,.3); width: auto; max-height: 700px;"
             alt="Andre"
           />
           <div>
@@ -369,27 +369,29 @@ $formations = $sectionThree->getFormations();
         <h5>Dados da seção um ainda não foram cadastrados</h5>
       <?php } ?>
       <hr>
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <?php if (isset($sectionTwoData['section_id'])) : ?>
+          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#editSectionTwoOffcanvas" aria-controls="editSectionTwoOffcanvas">
+            Editar essa seção
+          </button>
+        <?php endif; ?>
+        <?php if (isset($sectionTwoData)) : ?>
+          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#createSectionTwoOffcanvas" aria-controls="createSectionTwoOffcanvas">
+            Criar seção
+          </button>
+        <?php endif; ?>
+      </div>
       <div
         class="
           d-flex
           flex-column
           flex-xl-row
+          justify-content-center
           gap-5
+          mb-5
         "
       >
         <div>
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <?php if (isset($sectionTwoData['section_id'])) : ?>
-              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#editSectionTwoOffcanvas" aria-controls="editSectionTwoOffcanvas">
-                Editar essa seção
-              </button>
-            <?php endif; ?>
-            <?php if (isset($sectionTwoData)) : ?>
-              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#createSectionTwoOffcanvas" aria-controls="createSectionTwoOffcanvas">
-                Criar seção
-              </button>
-            <?php endif; ?>
-          </div>
           <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="createSectionTwoOffcanvas" aria-labelledby="staticBackdropLabel">
             <div class="offcanvas-header border-bottom">
               <h5 class="offcanvas-title" id="staticBackdropLabel">Criando Seção #2</h5>

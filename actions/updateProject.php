@@ -21,6 +21,16 @@ if (isset($_POST["update_project"])) {
     }
   }
 
+  $prj_stacks = [];
+
+  if (isset($_POST['prj_stacks'])) {
+    $prj_stacks = $_POST['prj_stacks'];
+  } else {
+    $session->create("error", "Informe pelo menos uma stack");
+    header('Location: /views/projects/edit.php?project_id='.$_POST["prj_id"]);
+    exit;  
+  }
+
   $corporative = false;
 
   if (isset($_POST["prj_corporative"])) {

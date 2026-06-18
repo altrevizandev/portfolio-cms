@@ -13,6 +13,7 @@
   $prj = new Project();
 
   $projectDetails = $prj->findById($project_id);
+
 ?>
 
 <!doctype html>
@@ -70,6 +71,7 @@
           <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item"><a href="/views/projects">Projetos</a></li>
           <li class="breadcrumb-item" aria-current="page">
+            
             Visualizando <?= $projectDetails["prj_title"] ?>
           </li>
         </ol>

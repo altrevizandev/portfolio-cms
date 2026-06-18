@@ -38,10 +38,22 @@ if (isset($_POST["create_project"])) {
 
   $thumbnail = '/public/images/' . $filename;
 
+  $prj_corporative = isset($_POST["prj_corporative"]) ? true : false;
+
+  $prj_stacks = [];
+
+  if (isset($_POST["prj_stacks"])) {
+    $prj_stacks = $_POST["prj_stacks"];
+  } else {
+    $session->create('error', 'Informe pelo menos uma stack');
+    header('Location: /views/projects/create.php');
+    exit;
+  }
+
   $projects->createPoject(
     trim($_POST["prj_title"]),
     trim($_POST["prj_description"]),
-    $_POST["prj_corporative"],
+    $prj_corporative,
     trim($_POST["prj_challenge"]),
     $thumbnail,
     trim($_POST["prj_solution"]),

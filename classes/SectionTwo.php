@@ -80,12 +80,15 @@ class SectionTwo {
         ]);
       }
 
-      $section_data['image'] = $db_result_array_section_two['image'];
-      $section_data['section_id'] = $db_result_array_section_two['id'];
+      $section_data['image'] = $db_result_array_section_two[0]['image'];
+      $section_data['section_id'] = $db_result_array_section_two[0]['id'];
 
       return $section_data;
     } else {
-      return [];
+      $section_data['image'] = $db_result_array_section_two[0]['image'];
+      $section_data['section_id'] = $db_result_array_section_two[0]['id'];
+
+      return $section_data;
     }
   }
 

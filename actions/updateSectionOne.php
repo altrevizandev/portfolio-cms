@@ -28,7 +28,16 @@ if (isset($_POST['update_section_one'])) {
   $position = trim($_POST['position']);
   $about_me = trim($_POST['about_me']);
   $studies = trim($_POST['studies']);
-  $stacks = $_POST['stacks'];
+
+  $stacks = [];
+
+  if (isset($_POST['stacks'])) {
+    $stacks = $_POST['stacks'];
+  } else {
+    $session->create("error", "Informe pelo menos uma stack");
+    header('Location: /views/admin/change-home.php');
+    exit;
+  }
 
   if (isset($_POST["so_one_change_img"]) && empty($_FILES['new_image']['name'])) {
     $session->create("error", "Informe uma imagem para a nova Thumbnail");

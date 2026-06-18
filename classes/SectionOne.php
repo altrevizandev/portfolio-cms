@@ -49,46 +49,38 @@ class SectionOne {
 
     $db_result_array = pg_fetch_all($result_session_one);
 
-    $sectionOne = [];
-    $stacks = [];
-    $finalList = [];
+    $sectionOne = null;
 
-    for ($count = 0; $count < count($db_result_array); $count++) { //12
-      if ($db_result_array[$count]['id'] == $db_result_array[$count+1]['id']) {
-        array_push(
-          $stacks, [
-            "stack_id" => $db_result_array[$count]['stack_id'],
-            "stack_name" => $db_result_array[$count]['stack_name'], "stack_icon" => $db_result_array[$count]['stack_icon']
-          ]
-        );
-      } else {
-        array_push(
-          $stacks, [
-            "stack_id" => $db_result_array[$count]['stack_id'],
-            "stack_name" => $db_result_array[$count]['stack_name'], "stack_icon" => $db_result_array[$count]['stack_icon']
-          ]
-        );
+    foreach ($db_result_array as $row) {
 
-        $birthDate = new DateTime($db_result_array[$count]['birth_date']);
-
+      if (!$sectionOne) {
+        $birthDate = new DateTime($row['birth_date']);
         $today = new DateTime();
 
-        $age = $today->diff($birthDate)->y;
-        
-        array_push(
-          $sectionOne, [
-            "id" => $db_result_array[$count]['id'], "name" => $db_result_array[$count]['name'],  "position" => $db_result_array[$count]['position'], "image" => $db_result_array[$count]['image'], "stacks" => $stacks, "studies" => $db_result_array[$count]['studies'], "about" => $db_result_array[$count]['about'], "address" => $db_result_array[$count]['address'], "age" => $age, "birth_date" => $db_result_array[$count]['birth_date']
-          ]
-        );
+        $sectionOne = [
+          "id" => $row['id'],
+          "name" => $row['name'],
+          "position" => $row['position'],
+          "image" => $row['image'],
+          "studies" => $row['studies'],
+          "about" => $row['about'],
+          "address" => $row['address'],
+          "birth_date" => $row['birth_date'],
+          "age" => $today->diff($birthDate)->y,
+          "stacks" => []
+        ];
+      }
 
-        array_push($finalList, $sectionOne[0]);
-
-        $sectionOne = [];
-        $stacks = [];
+      if (!empty($row['stack_id'])) {
+        $sectionOne['stacks'][] = [
+          "stack_id" => $row['stack_id'],
+          "stack_name" => $row['stack_name'],
+          "stack_icon" => $row['stack_icon']
+        ];
       }
     }
 
-    return $finalList;
+    return $sectionOne;
   }
 
   public function create(
