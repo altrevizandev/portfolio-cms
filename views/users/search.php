@@ -114,20 +114,39 @@
 
                 <div class="card-footer d-flex gap-2 flex-wrap">
 
-                  <a
-                    href="/views/users/details.php?id=<?= $user["id"] ?>"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Ver
-                  </a>
-
-                  <button class="btn btn-warning btn-sm">
-                    Editar
+                  <a href="/views/users/edit.php?user_id=<?= $user["id"] ?>" class="btn btn-warning btn-sm">Editar</a>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal<?= $user['id'] ?>">
+                    Deletar
                   </button>
 
-                  <button class="btn btn-danger btn-sm">
-                    Excluir
-                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="deleteUserModal<?= $user['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserModalLabel<?= $user['id'] ?>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="deleteUserModalLabel<?= $user['id'] ?>">Deletar Usuário?</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Deseja mesmo deletar este usuário?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          <form action="/actions/deleteUser.php" method="post">
+                            <input name="user_id" type="text" hidden value="<?= $user['id'] ?>">
+                            <?php if (isset($_SESSION['user'])) : ?>
+                              <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+                                <button type="submit" name="delete_user" class="btn btn-danger">Sim, quero deletar</button>
+                              <?php endif; ?>
+                            <?php else: ?>
+                              <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>
+                            <?php endif; ?>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                 </div>
 

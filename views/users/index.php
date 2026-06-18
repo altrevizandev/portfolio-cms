@@ -130,6 +130,8 @@
                           <?php if (isset($_SESSION['user'])) : ?>
                             <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
                               <button type="submit" name="delete_user" class="btn btn-danger">Sim, quero deletar</button>
+                            <?php else: ?>
+                              <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>
                             <?php endif; ?>
                           <?php else: ?>
                             <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>

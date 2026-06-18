@@ -129,11 +129,11 @@
                 <input name="stack_id" type="text" hidden value="<?= $stackDetails['id'] ?>">
                 <?php if (isset($_SESSION['user'])) { ?>
                   <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
-                    <button disabled type="submit" name="delete_stack" class="btn btn-danger">
+                    <button type="submit" name="delete_stack" class="btn btn-danger">
                       Sim, quero deletar
                     </button>
                   <?php else: ?>
-                    <button type="submit" name="delete_stack" class="btn btn-danger">
+                    <button disabled type="submit" name="delete_stack" class="btn btn-danger">
                       Sim, quero deletar
                     </button>
                   <?php endif; ?>
