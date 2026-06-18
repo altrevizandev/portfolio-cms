@@ -119,8 +119,8 @@ $formations = $sectionThree->getFormations();
         <h5>Dados da seção um ainda não foram cadastrados</h5>
       <?php } ?>
       <hr>
+      <h3 class="mb-5">Experiências Profissionais</h3>
       <div class="d-flex flex-column-reverse flex-lg-row justify-content-between gap-5">
-        <h3 class="mb-5">Experiências Profissionais</h3>
         <?php if ($sectionTwoData != null) : ?>
           <?php if (count($sectionTwoData['experiences']) > 0) { ?>
             <div class="d-flex flex-column gap-3">
