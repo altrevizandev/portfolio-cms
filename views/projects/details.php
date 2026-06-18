@@ -108,7 +108,7 @@
                   Deletar
                 </button>
               </div>
-            <?php ?>
+            <?php endif; ?>
           <?php endif; ?>
         </div>
         <p><?= $projectDetails["prj_description"] ?></p>
