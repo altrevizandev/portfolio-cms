@@ -3,6 +3,16 @@
   require_once ROOT_PATH . 'classes/Projects.php';
   require_once ROOT_PATH . 'classes/Stacks.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
+
   $st = new Stacks();
 
   $stacks = $st->listStacks();

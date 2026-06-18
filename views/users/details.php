@@ -3,6 +3,11 @@
 
   require_once ROOT_PATH . 'classes/Auth.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
   if (!isset($_GET["user_id"])) {
     header('Location: ./index.php');
     exit;

@@ -112,9 +112,13 @@
             </div>
           </div>
         <?php } else { ?>
-          <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdropEditContact" aria-controls="staticBackdropEditContact">
-            Editar
-          </button>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+              <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdropEditContact" aria-controls="staticBackdropEditContact">
+                Editar
+              </button>
+            <?php endif; ?>
+          <?php endif; ?>
         <?php } ?>
       </div>
       <?php include('../layouts/error.php') ?>

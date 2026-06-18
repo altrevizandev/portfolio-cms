@@ -3,6 +3,16 @@
 
   require_once ROOT_PATH . 'classes/Stacks.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
+
   $st = new Stacks();
 
   $stacks = $st->listStacks();
@@ -91,9 +101,13 @@
                 </div>
               <?php } ?>
             </div>
-            <div class="d-flex align-items-center justify-content-center gap-3">
-              <button class="btn btn-warning btn-sm">Editar</button>
-            </div>
+            <?php if (isset($_SESSION['user'])) : ?>
+              <?php if ($_SESSION['user']['user_role']) : ?>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <button class="btn btn-warning btn-sm">Editar</button>
+                </div>
+              <?php endif; ?>
+            <?php endif; ?>
           </form>
         <?php } else { ?>
           <h5>Nenhuma stack cadastrada</h5>

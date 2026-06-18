@@ -71,7 +71,11 @@
       </nav>
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
         <h2>Usuários</h2>
-        <a href="/views/users/create.php" class="btn btn-success btn-sm">Criar</a>
+        <?php if (isset($_SESSION['user'])) : ?>
+          <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+            <a href="/views/users/create.php" class="btn btn-success btn-sm">Criar</a>
+          <?php endif; ?>
+        <?php endif; ?>
       </div>
       <div class="d-flex gap-4">
         <form action="/views/users/search.php" method="get" class="row g-2">
@@ -104,44 +108,40 @@
                   "
                 ><?= $user["user_description"] ?></p>
               </div>
-              <div class="card-footer d-flex flex-wrap gap-2">
-                <a href="/views/users/details.php?user_id=<?= $user["id"] ?>" class="btn btn-primary btn-sm">Ver</a>
-                <a href="/views/users/edit.php?user_id=<?= $user["id"] ?>" class="btn btn-warning btn-sm">Editar</a>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal<?= $user['id'] ?>">
-                  Deletar
-                </button>
+              <?php if (isset($_SESSION['user'])) : ?>
+                <?php if ($_SESSION['user']['user_role']) : ?>
+                  <div class="card-footer d-flex flex-wrap gap-2">
+                    <a href="/views/users/details.php?user_id=<?= $user["id"] ?>" class="btn btn-primary btn-sm">Ver</a>
+                    <a href="/views/users/edit.php?user_id=<?= $user["id"] ?>" class="btn btn-warning btn-sm">Editar</a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal<?= $user['id'] ?>">
+                      Deletar
+                    </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="deleteUserModal<?= $user['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserModalLabel<?= $user['id'] ?>" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteUserModalLabel<?= $user['id'] ?>">Deletar Usuário?</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        Deseja mesmo deletar este usuário?
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <form action="/actions/deleteUser.php" method="post">
-                          <input name="user_id" type="text" hidden value="<?= $user['id'] ?>">
-                          <?php if (isset($_SESSION['user'])) : ?>
-                            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteUserModal<?= $user['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserModalLabel<?= $user['id'] ?>" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteUserModalLabel<?= $user['id'] ?>">Deletar Usuário?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Deseja mesmo deletar este usuário?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form action="/actions/deleteUser.php" method="post">
+                              <input name="user_id" type="text" hidden value="<?= $user['id'] ?>">
                               <button type="submit" name="delete_user" class="btn btn-danger">Sim, quero deletar</button>
-                            <?php else: ?>
-                              <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>
-                            <?php endif; ?>
-                          <?php else: ?>
-                            <button type="submit" name="delete_user" class="btn btn-danger" disabled>Sim, quero deletar</button>
-                          <?php endif; ?>
-                        </form>
+                            </form>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                <?php endif; ?>
+              <?php endif; ?>
             </div>
           </div>
         <?php

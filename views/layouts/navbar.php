@@ -31,9 +31,13 @@
           <a class="nav-link" href="/views/contact">Contato</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/views/admin">Admin</a>
-        </li>
+        <?php if (isset($_SESSION['user'])) : ?>
+          <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="/views/admin">Admin</a>
+            </li>
+          <?php endif; ?>
+        <?php endif; ?>
       </ul>
 
       <?php if (isset($_SESSION['user'])) : ?>

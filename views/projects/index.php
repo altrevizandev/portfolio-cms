@@ -80,7 +80,11 @@
       <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
         <h3>Meus projetos</h3>
         <div class="d-flex flex-wrap gap-2">
-          <a href="/views/projects/create.php" class="btn btn-success btn-sm align-self-start">Criar</a>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+              <a href="/views/projects/create.php" class="btn btn-success btn-sm align-self-start">Criar</a>
+            <?php endif; ?>
+          <?php endif; ?>
           <form action="/views/projects" method="get">
             <?php if (isset($_GET['disabled_projects']) && $_GET['disabled_projects'] == "true") { ?>
               <button type="submit" name="disabled_projects" class="btn btn-primary btn-sm" value="false">Ver projetos ativos</button>

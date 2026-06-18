@@ -2,6 +2,16 @@
   require_once '../../config/Constants.php';
 
   require_once ROOT_PATH . 'classes/Auth.php';
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
 ?>
 
 <!doctype html>
@@ -132,17 +142,13 @@
           </div>
           <div class="d-grid d-md-block">
             <?php if (isset($_SESSION['user'])) : ?>
-              <?php if ($_SESSION['user']['user_role'] == 'admin') { ?>
+              <?php if ($_SESSION['user']['user_role'] == 'admin') : ?>
                 <button
                   name="create_user"
                   class="btn btn-primary" type="submit">
                   Criar
                 </button>
-              <?php } else { ?>
-                <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
-              <?php } ?>
-            <?php else : ?>
-              <button name="create_user" type="submit" class="btn btn-primary" disabled>Criar</button>
+              <?php endif; ?>
             <?php endif; ?>
           </div>
         </form> 

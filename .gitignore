@@ -5,6 +5,6 @@
 
 .env.local
 
-/public/uploads
+/public/images
 
 *.log

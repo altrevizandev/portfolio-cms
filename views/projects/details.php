@@ -89,23 +89,27 @@
               </span>
             <?php endif; ?>
           </div>
-          <div class="d-flex gap-2">
-            <a
-              href="/views/projects/edit.php?project_id=<?= $projectDetails['id'] ?>"
-              class="btn btn-warning btn-sm"
-            >
-              Editar
-            </a>
+          <?php if (isset($_SESSION['user'])) : ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
+              <div class="d-flex gap-2">
+                <a
+                  href="/views/projects/edit.php?project_id=<?= $projectDetails['id'] ?>"
+                  class="btn btn-warning btn-sm"
+                >
+                  Editar
+                </a>
 
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-            >
-              Deletar
-            </button>
-          </div>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop"
+                >
+                  Deletar
+                </button>
+              </div>
+            <?php ?>
+          <?php endif; ?>
         </div>
         <p><?= $projectDetails["prj_description"] ?></p>
         <img

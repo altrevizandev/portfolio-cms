@@ -3,6 +3,16 @@
 
   require_once ROOT_PATH . 'classes/Auth.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
+
   if (!isset($_GET["user_id"])) {
     header('Location: /');
     exit;
@@ -132,35 +142,11 @@
             </select>
           </div>
           <div>
-            <?php if (isset($_SESSION['user'])) { ?>
-              <?php if ($_SESSION['user']['user_role'] == 'admin') : ?>
-                <div class="d-grid d-md-block">
-                  <button
-                    name="update_user"
-                    type="submit"
-                    class="btn btn-primary w-100 w-md-auto"
-                  >Salvar</button>
-                </div>  
-              <?php else: ?>
-                <div class="d-grid d-md-block">
-                  <button
-                    name="update_user"
-                    type="submit"
-                    class="btn btn-primary w-100 w-md-auto"
-                    disabled
-                  >Salvar</button>
-                </div>
-              <?php endif; ?>
-            <?php } else { ?>
-              <div class="d-grid d-md-block">
-                <button
-                  name="update_user"
-                  type="submit"
-                  class="btn btn-primary w-100 w-md-auto"
-                  disabled
-                >Salvar</button>
-              </div>
-            <?php } ?>
+            <button
+              name="update_user"
+              type="submit"
+              class="btn btn-primary w-100 w-md-auto"
+            >Salvar</button>
           </div>
         </form>
       </div>

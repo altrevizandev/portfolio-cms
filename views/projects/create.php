@@ -3,6 +3,16 @@
 
   require_once ROOT_PATH . 'classes/Stacks.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
+
   $st = new Stacks();
 
   $stacks = $st->listStacks();
@@ -127,13 +137,9 @@
         </div>
         <div class="mb-3">
           <?php if (isset($_SESSION['user'])) : ?>
-            <?php if ($_SESSION['user']['user_role'] == "admin") { ?>
+            <?php if ($_SESSION['user']['user_role'] == "admin") : ?>
               <button type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
-            <?php } else { ?>
-              <button disabled type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
-            <?php } ?>
-          <?php else: ?>
-            <button disabled type="submit" name="create_project" class="btn btn-success btn-sm">Criar</button>
+            <?php endif; ?>
           <?php endif; ?>
         </div>
       </form>

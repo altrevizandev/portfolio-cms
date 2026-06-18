@@ -4,6 +4,15 @@
 
   require_once ROOT_PATH . 'classes/Auth.php';
 
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit;
+  }
+
+  if ($_SESSION['user']['user_role'] != "admin") {
+    header('Location: /');
+    exit;
+  }
 ?>
 
 <!doctype html>
