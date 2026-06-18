@@ -120,7 +120,7 @@ $formations = $sectionThree->getFormations();
       <?php } ?>
       <hr>
       <div class="d-flex flex-column-reverse flex-lg-row justify-content-between gap-5">
-        <h3 class="mb-5">Formação</h3>
+        <h3 class="mb-5">Experiências Profissionais</h3>
         <?php if ($sectionTwoData != null) : ?>
           <?php if (count($sectionTwoData['experiences']) > 0) { ?>
             <div class="d-flex flex-column gap-3">
