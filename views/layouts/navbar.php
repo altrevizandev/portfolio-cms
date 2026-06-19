@@ -26,6 +26,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/views/projects">Projetos</a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="/views/testimonials">Depoimentos</a>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link" href="/views/contact">Contato</a>

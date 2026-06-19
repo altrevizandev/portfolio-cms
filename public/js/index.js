@@ -1,6 +1,4 @@
 const setPreviewImage = (e, img) => {
-  console.log(e);
-  
   const files = e.target.files;
 
   if (files.length > 0) {
@@ -69,7 +67,7 @@ const cancelChangeOfImages = (
 let soCreateImgInput = document.getElementById("so-create-image-input");
 let soCreateImg = document.getElementById("so-create-image-preview");
 
-soCreateImgInput.addEventListener('change', (e) => {
+soCreateImgInput?.addEventListener('change', (e) => {
   setPreviewImage(e, soCreateImg);
 });
 
@@ -127,12 +125,12 @@ const stCreateImagePreviewImg = document.getElementById('st-create-image-preview
 
 toggleVisibilitty(stCreateSinceDateAreaDiv);
 
-stCreateActualJobCheckInput.addEventListener('change', (e) => {
+stCreateActualJobCheckInput?.addEventListener('change', (e) => {
   toggleJobDateAreasVisibilitty(stCreateActualJobCheckInput, stCreateSinceDateAreaDiv);
   toggleJobDateAreasVisibilitty(stCreateActualJobCheckInput, stCreateStartEndDateAreaDiv);
 });
 
-stCreateImageInput.addEventListener('change', (e) => {
+stCreateImageInput?.addEventListener('change', (e) => {
   setPreviewImage(e, stCreateImagePreviewImg);
 });
 
@@ -386,4 +384,13 @@ s3CheckboxInputs.forEach((input) => {
     }
 
   });
+});
+
+// Testimonials
+
+let testimonialImageInput = document.getElementById("testimonial-img");
+let testimonialImagePreview = document.getElementById("testimonial-img-preview");
+
+testimonialImageInput?.addEventListener('change', (e) => {
+  setPreviewImage(e, testimonialImagePreview);
 });

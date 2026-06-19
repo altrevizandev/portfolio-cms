@@ -160,6 +160,20 @@ CREATE TABLE IF NOT EXISTS section_stacks (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS testimonials (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    name VARCHAR(130),
+    company VARCHAR(130),
+    position VARCHAR(100),
+    description TEXT
+    image TEXT DEFAULT '/public/images/default-user.jpeg',
+    approved BOOLEAN DEFAULT FALSE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO users (
     user_name,
     user_email,
