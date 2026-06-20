@@ -14,6 +14,9 @@ services:
       DB_USER: portfolio_user
       DB_PASSWORD: Alt@839517240999
 
+    volumes:
+      - /opt/portfolio-cms/public/images:/var/www/html/public/images
+
     networks:
       - api_default
 
